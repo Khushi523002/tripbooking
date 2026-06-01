@@ -1,0 +1,119 @@
+.detail-hero {
+  height: 480px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.detail-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,27,42,0.9) 0%, rgba(13,27,42,0.2) 100%);
+}
+
+.detail-hero-content {
+  position: relative;
+  padding: 40px;
+  color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.detail-badges { display: flex; gap: 10px; margin-bottom: 16px; }
+
+.detail-hero-content h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-bottom: 16px;
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 40px;
+  padding-top: 48px;
+  padding-bottom: 80px;
+}
+
+.detail-main section {
+  margin-bottom: 40px;
+}
+.detail-main h2 {
+  font-size: 1.6rem;
+  color: var(--dark);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+.detail-main p { color: var(--text); line-height: 1.8; }
+
+.highlight-list, .included-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.highlight-list li, .included-list li {
+  padding: 10px 16px;
+  background: var(--bg);
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+/* Booking Card */
+.booking-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+}
+
+.booking-price {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--border);
+}
+
+.big-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+.price-label { color: var(--text-light); }
+
+.booking-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.total-amount {
+  font-size: 1.3rem;
+  color: var(--primary);
+  font-family: 'Playfair Display', serif;
+}
+
+@media (max-width: 900px) {
+  .detail-layout { grid-template-columns: 1fr; }
+  .booking-card { position: static; }
+}
