@@ -27,6 +27,7 @@ export default function Navbar() {
           <Link to="/" className={isActive('/') ? 'active' : ''}>Home</Link>
           <Link to="/trips" className={isActive('/trips') ? 'active' : ''}>Explore Trips</Link>
           {user && <Link to="/my-bookings" className={isActive('/my-bookings') ? 'active' : ''}>My Bookings</Link>}
+          {user?.isAdmin && ( <Link to="/admin" className={isActive('/admin') ? 'active' : ''}>Admin</Link>)}
         </div>
 
         <div className="nav-auth">

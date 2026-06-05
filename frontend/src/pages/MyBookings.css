@@ -64,8 +64,62 @@
 
 .cancel-btn { padding: 7px 18px; font-size: 0.82rem; }
 
+.notif-banner {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.has-notif {
+  border: 2px solid #ffc107 !important;
+}
+
+.agency-card {
+  margin-top: 12px;
+  background: #d4edda;
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+.agency-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  color: #155724;
+}
+.agency-card p { font-size: 0.9rem; margin-bottom: 4px; }
+
+.reject-note {
+  margin-top: 10px;
+  background: #f8d7da;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  color: #721c24;
+}
+
+.notif-read-btn { font-size: 0.78rem; padding: 6px 12px; }
+
+
 @media (max-width: 600px) {
   .booking-item { flex-direction: column; align-items: flex-start; }
   .booking-img { width: 100%; height: 160px; }
   .booking-status-block { flex-direction: row; width: 100%; justify-content: space-between; align-items: center; }
+}
+
+.trip-detail-section { margin: 8px 0; padding: 8px 0; border-top: 1px dashed #ccc; border-bottom: 1px dashed #ccc; }
+.itinerary-box { background: #f8f9fa; border-radius: 8px; padding: 10px 12px; margin: 8px 0; font-size: 0.85rem; }
+.admin-note-user { background: #fff3cd; padding: 6px 10px; border-radius: 6px; font-size: 0.85rem; }
+.btn-expand {
+  background: none; border: none; color: var(--primary); cursor: pointer;
+  font-size: 0.82rem; font-weight: 600; padding: 4px 0; margin-top: 6px; display: block;
+}
+.btn-expand:hover { text-decoration: underline; }
+.payment-badge {
+  display: inline-block; padding: 3px 10px; border-radius: 50px;
+  font-size: 0.75rem; font-weight: 700; background: #d4edda; color: #155724; text-transform: uppercase;
 }

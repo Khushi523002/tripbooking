@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const Trip = require('../models/Trip');
-const { protect } = require('../middleware/auth');
+const { protect, adminOnly } = require('../middleware/auth');
 
-// @route GET /api/trips  — get all trips with filters
+// GET /api/trips  — get all trips with filters
 router.get('/', async (req, res) => {
   try {
     const { category, minPrice, maxPrice, search, featured } = req.query;
     const query = {};
-
     if (category) query.category = category;
     if (featured) query.featured = true;
     if (minPrice || maxPrice) {
@@ -22,36 +21,48 @@ router.get('/', async (req, res) => {
         { destination: { $regex: search, $options: 'i' } },
       ];
     }
-
     const trips = await Trip.find(query).sort({ createdAt: -1 });
     res.json(trips);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  } catch (err) { res.status(500).json({ message: err.message }); }
 });
 
-// @route GET /api/trips/:id
+// GET /api/trips/:id
 router.get('/:id', async (req, res) => {
   try {
     const trip = await Trip.findById(req.params.id);
     if (!trip) return res.status(404).json({ message: 'Trip not found' });
     res.json(trip);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  } catch (err) { res.status(500).json({ message: err.message }); }
 });
 
-// @route POST /api/trips  — admin only (simple protect for now)
-router.post('/', protect, async (req, res) => {
+// POST /api/trips  — ADMIN only
+router.post('/', protect, adminOnly, async (req, res) => {
   try {
     const trip = await Trip.create(req.body);
     res.status(201).json(trip);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+  } catch (err) { res.status(400).json({ message: err.message }); }
 });
 
-// Seed some demo trips
+// PUT /api/trips/:id  — ADMIN only
+router.put('/:id', protect, adminOnly, async (req, res) => {
+  try {
+    const trip = await Trip.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    if (!trip) return res.status(404).json({ message: 'Trip not found' });
+    res.json(trip);
+  } catch (err) { res.status(400).json({ message: err.message }); }
+});
+
+// DELETE /api/trips/:id  — ADMIN only
+router.delete('/:id', protect, adminOnly, async (req, res) => {
+  try {
+    const trip = await Trip.findById(req.params.id);
+    if (!trip) return res.status(404).json({ message: 'Trip not found' });
+    await trip.deleteOne();
+    res.json({ message: 'Trip deleted' });
+  } catch (err) { res.status(500).json({ message: err.message }); }
+});
+
+// POST /api/trips/seed/demo — seed demo data (no auth for setup)
 router.post('/seed/demo', async (req, res) => {
   try {
     await Trip.deleteMany({});
@@ -94,7 +105,7 @@ router.post('/seed/demo', async (req, res) => {
       },
       {
         title: 'Jim Corbett Wildlife Safari', destination: 'Jim Corbett, Uttarakhand',
-        description: 'Get up close with tigers, elephants and rare birds in India\'s oldest national park.',
+        description: "Get up close with tigers, elephants and rare birds in India's oldest national park.",
         image: 'assets/images/corbet.jpg',
         price: 15000, duration: 3, maxGroupSize: 6, category: 'wildlife',
         difficulty: 'easy', featured: false, rating: 4.6, reviewCount: 67,
@@ -104,9 +115,7 @@ router.post('/seed/demo', async (req, res) => {
     ];
     const trips = await Trip.insertMany(demos);
     res.json({ message: `${trips.length} trips seeded!`, trips });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  } catch (err) { res.status(500).json({ message: err.message }); }
 });
 
 module.exports = router;

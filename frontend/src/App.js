@@ -9,6 +9,8 @@ import TripDetail from './pages/TripDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import MyBookings from './pages/MyBookings';
+import AdminPanel from './pages/AdminPanel';
+import CreateAdmin from './pages/CreateAdmin';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
@@ -29,7 +31,9 @@ function App() {
           <Route path="/trips/:id" element={<TripDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/create-admin" element={<CreateAdmin />} />
           <Route path="/my-bookings" element={<PrivateRoute><MyBookings /></PrivateRoute>} />
+          <Route path="/admin" element={<PrivateRoute><AdminPanel /></PrivateRoute>} />
         </Routes>
       </Router>
     </AuthProvider>

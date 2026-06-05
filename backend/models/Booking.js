@@ -8,7 +8,7 @@ const bookingSchema = new mongoose.Schema({
   totalAmount: { type: Number, required: true },
   status: {
     type: String,
-    enum: ['pending', 'confirmed', 'cancelled'],
+    enum: ['pending', 'active', 'confirmed', 'rejected', 'cancelled'],
     default: 'pending',
   },
   paymentStatus: {
@@ -17,6 +17,19 @@ const bookingSchema = new mongoose.Schema({
     default: 'unpaid',
   },
   specialRequests: { type: String, default: '' },
+  // Agency & trip details filled by admin on confirm
+  agencyName: { type: String, default: '' },
+  agencyContact: { type: String, default: '' },
+  meetingPoint: { type: String, default: '' },
+  reportingTime: { type: String, default: '' },
+  guideContact: { type: String, default: '' },
+  vehicleDetails: { type: String, default: '' },
+  hotelName: { type: String, default: '' },
+  hotelContact: { type: String, default: '' },
+  emergencyContact: { type: String, default: '' },
+  itinerarySummary: { type: String, default: '' },
+  adminNote: { type: String, default: '' },
+  notificationRead: { type: Boolean, default: false },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Booking', bookingSchema);

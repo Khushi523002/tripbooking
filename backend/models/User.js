@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true, minlength: 6 },
   phone: { type: String, default: '' },
   avatar: { type: String, default: '' },
+  isAdmin: { type: Boolean, default: false },  // ← yeh add karo
 }, { timestamps: true });
 
 // Hash password before saving

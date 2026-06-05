@@ -39,3 +39,13 @@
   font-size: 0.9rem;
 }
 .auth-switch a { color: var(--primary); font-weight: 600; }
+
+.admin-hint {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.83rem;
+  color: #856404;
+  margin-bottom: 16px;
+}
